@@ -50,7 +50,8 @@ const HederButton = ({text, btnColor, textColor, activteTab, setActiveTab}) => (
         <Text
             style={{
                 color: activteTab !== text ? "black":"white",
-                fontSize: 15
+                fontSize: 15,
+                fontWeight: 'bold'
             }}
         > {text} </Text>
     </TouchableOpacity>
