@@ -8,6 +8,10 @@ const items = [
         text: "Pick-up"
     },
     {
+        images: require('../assets/images/soft-drink.png'),
+        text: "Soft Drink"
+    },
+    {
         images: require('../assets/images/bread.png'),
         text: "Bakery Items"
     },

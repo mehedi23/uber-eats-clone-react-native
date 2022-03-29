@@ -3,10 +3,10 @@ import { View, Text , ScrollView} from 'react-native';
 import HeaderTabs from '../components/HeaderTabs';
 import SearchBar from '../components/SearchBar';
 import Categories from '../components/Categories';
-import ResturantItem from '../components/ResturantItem'
+import ResturantItem from '../components/ResturantItem';
+import BottomTabs from '../components/BottomTabs';
 
-function Home() {
-
+function Home({navigation}) {
   const [city, setCity] = useState('San diago');
   const [resturants , setResturants] = useState('')
 
@@ -57,8 +57,9 @@ function Home() {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Categories/>
-        <ResturantItem resturants={resturants}/>
+        <ResturantItem resturants={resturants} navigation={navigation}/>
       </ScrollView>
+      <BottomTabs/>
     </View>
   )
 }

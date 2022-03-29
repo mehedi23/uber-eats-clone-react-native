@@ -40,36 +40,39 @@ const dummy = [
 ]
 
 
-export default function ResturantItem({resturants}) {
+export default function ResturantItem({resturants, navigation}) {
     
     return (
-        <TouchableOpacity
-            activeOpacity={1}
-            style={{
-                marginBottom:30
-            }}
-        >
+        <>
             {
                 resturants.length > 0 ? resturants.map((item,index)=> (
-                    <View 
-                        key={index}
+                    <TouchableOpacity
+                        activeOpacity={.8}
                         style={{
-                            marginTop: 10,
-                            padding: 15,
-                            backgroundColor: 'white'
+                            marginBottom:30
                         }}
+                        onPress={() => navigation.navigate('Resturant')}
                     >
-                        <ResturantImage
-                            img={item.image_url}
-                        />
-                        <ResturantInfo
-                            name={item.name}
-                            rating={item.rating}
-                        />
-                    </View>
+                        <View 
+                            key={index}
+                            style={{
+                                marginTop: 10,
+                                padding: 15,
+                                backgroundColor: 'white'
+                            }}
+                        >
+                            <ResturantImage
+                                img={item.image_url}
+                            />
+                            <ResturantInfo
+                                name={item.name}
+                                rating={item.rating}
+                            />
+                        </View>
+                    </TouchableOpacity>
                 )) : <Text>Loading</Text>
             }
-        </TouchableOpacity>
+        </>
     )
 };
 
