@@ -17,11 +17,15 @@ const yelpResturantInfo = {
     ]
 };
 
-const { name, img, price, rating, categories, reviews } = yelpResturantInfo;
-const formate_category = categories.map((cat) => cat.tittle).join('▪️');
+// const { name, img, price, rating, categories, reviews } = yelpResturantInfo;
+// const formate_category = categories.map((cat) => cat.tittle).join('▪️');
 
 
-export default function About() {
+export default function About(props) {
+    const { name, img, price, rating, categories, reviews } = props.route.params;
+    console.log(categories)
+    const formate_category = categories.map((cat) => cat.title).join('▪️');
+    
     return (
         <View>
             <Image source={{uri:img}} style={{width:'100%', height:180}}/>

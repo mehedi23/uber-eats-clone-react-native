@@ -1,6 +1,7 @@
 import { View, Text, Image, ScrollView } from 'react-native'
 import React from 'react';
 import {Divider} from 'react-native-elements'
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 
 const food = [
@@ -76,9 +77,13 @@ const Items = (props) => (
             justifyContent: 'space-between'
         }}
     >
+        <BouncyCheckbox
+            iconStyle={{ borderColor: "lightgray", borderRadius: 5 }}
+            fillColor='green'
+        />
         <View
             style={{
-                width:'55%',
+                width:'50%',
                 justifyContent: 'space-evenly'
             }}
         >

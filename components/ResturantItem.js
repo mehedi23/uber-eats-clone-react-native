@@ -2,6 +2,8 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import {MaterialCommunityIcons} from 'react-native-vector-icons'
 import React from 'react';
 
+const loader = require('../assets/icons/loader.gif')
+
 
 
 const dummy = [
@@ -51,10 +53,17 @@ export default function ResturantItem({resturants, navigation}) {
                         style={{
                             marginBottom:30
                         }}
-                        onPress={() => navigation.navigate('Resturant')}
+                        onPress={() => navigation.navigate('Resturant', {
+                            name : item.name,
+                            img : item.image_url,
+                            price : item.price,
+                            rating : item.rating,
+                            reviews : item.review_count,
+                            categories : item.categories
+                        })}
+                        key={index}
                     >
                         <View 
-                            key={index}
                             style={{
                                 marginTop: 10,
                                 padding: 15,
@@ -70,7 +79,23 @@ export default function ResturantItem({resturants, navigation}) {
                             />
                         </View>
                     </TouchableOpacity>
-                )) : <Text>Loading</Text>
+                )) :
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        marginTop: 100
+                    }}
+                >
+                    <Image 
+                        source={loader}
+                        style={{
+                            width: 60,
+                            height: 60,
+        
+                        }}
+                    />
+                </View>
             }
         </>
     )
