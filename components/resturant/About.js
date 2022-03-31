@@ -2,28 +2,8 @@ import { View, Text, Image } from 'react-native'
 import React from 'react';
 
 
-
-const yelpResturantInfo = {
-    name : 'Special 🔥🔥 BBQ Chiken Wings Hot 🥵🥵',
-    img : 'https://img.freepik.com/free-photo/concept-indian-cuisine-baked-chicken-wings-legs-honey-mustard-sauce-serving-dishes-restaurant-black-plate-indian-spices-wooden-table-background-image_127425-18.jpg',
-    price : '$$',
-    reviews : 1500,
-    rating : 4.5,
-    categories : [
-        {tittle : 'Thia'},
-        {tittle : 'Comfort food'},
-        {tittle : 'Ice Cream'},
-        {tittle : 'Snacks'}
-    ]
-};
-
-// const { name, img, price, rating, categories, reviews } = yelpResturantInfo;
-// const formate_category = categories.map((cat) => cat.tittle).join('▪️');
-
-
 export default function About(props) {
     const { name, img, price, rating, categories, reviews } = props.route.params;
-    console.log(categories)
     const formate_category = categories.map((cat) => cat.title).join('▪️');
     
     return (
