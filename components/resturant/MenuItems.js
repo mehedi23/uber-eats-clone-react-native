@@ -2,64 +2,32 @@ import { View, Text, Image, ScrollView } from 'react-native'
 import React from 'react';
 import {Divider} from 'react-native-elements'
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import {useSelector , useDispatch} from 'react-redux';
+import {cart_item} from '../../store/cartSlice'
 
-
-const food = [
-    {
-        tittle: 'Lasagna',
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        price: '$ 13.50',
-        img: 'https://cdn.pixabay.com/photo/2018/03/21/06/54/food-3245765_960_720.jpg'
-    },
-    {
-        tittle: 'Lasagna',
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        price: '$ 13.50',
-        img: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2018/1/23/0/FN_healthy-fast-food-red-robin-avocado-cobb-salad_s4x3.jpg.rend.hgtvcom.616.462.suffix/1516723515457.jpeg'
-    },
-    {
-        tittle: 'Lasagna',
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        price: '$ 13.50',
-        img: 'https://static.toiimg.com/photo/54327253.cms'
-    },
-    {
-        tittle: 'Lasagna G',
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        price: '$ 13.50',
-        img: 'https://assets.architecturaldigest.in/photos/60084f361b516d492c3ab3ec/16:9/w_2560%2Cc_limit/Mumbai-restaurant-COVID-19-1366x768.jpg'
-    },
-    {
-        tittle: 'Lasagna F',
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        price: '$ 13.50',
-        img: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2018/1/23/0/FN_healthy-fast-food-red-robin-avocado-cobb-salad_s4x3.jpg.rend.hgtvcom.616.462.suffix/1516723515457.jpeg'
-    },
-    {
-        tittle: 'Lasagna E',
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        price: '$ 13.50',
-        img: 'https://cdn.pixabay.com/photo/2018/03/21/06/54/food-3245765_960_720.jpg'
-    },
-    {
-        tittle: 'Lasagna d',
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        price: '$ 13.50',
-        img: 'https://assets.architecturaldigest.in/photos/60084f361b516d492c3ab3ec/16:9/w_2560%2Cc_limit/Mumbai-restaurant-COVID-19-1366x768.jpg'
-    }
-]
 
 export default function MenuItems() {
+
+    const dispatch = useDispatch();
+    const food_data = useSelector(state => state.foodItem.data);
+    const {cart_data} = useSelector(state => state.cartSlice)
+
+    const add_to_cart = (e) => {
+        dispatch(cart_item(e));
+    };
+
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             {
-                food.map( ( item, index ) => (
+                food_data.map( ( item, index ) => (
                     <View key={index}>
                         <Items 
+                            id={item.id}
                             tittle={item.tittle}
                             description={item.description}
                             price={item.price}
                             img={item.img}
+                            add_to_cart={add_to_cart}
                         />
                         <Divider width={.5} orientation='vertical' />
                     </View>
@@ -80,6 +48,11 @@ const Items = (props) => (
         <BouncyCheckbox
             iconStyle={{ borderColor: "lightgray", borderRadius: 5 }}
             fillColor='green'
+            onPress={()=>props.add_to_cart({
+                tittle: props.tittle,
+                price : props.price,
+                id:props.id
+            })}
         />
         <View
             style={{
