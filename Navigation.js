@@ -3,8 +3,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from './screens/Home';
 import Resturant from './screens/Resturant';
-import { store } from './store/store'
-import { Provider } from 'react-redux'
+import Payment from './screens/Payment'
+import { store } from './store/store';
+import { Provider } from 'react-redux';
 
 
 export default function Navigation() {
@@ -31,6 +32,7 @@ export default function Navigation() {
               >
                 <Stack.Screen name='Home' component={Home} options={{ headerShown: false }}/>
                 <Stack.Screen name='Resturant' component={Resturant} options={{ headerShown: false }}/>
+                <Stack.Screen name='Payment' component={Payment} options={{headerShown: false}}/>
             </Stack.Navigator>
         </Provider>
     </NavigationContainer>

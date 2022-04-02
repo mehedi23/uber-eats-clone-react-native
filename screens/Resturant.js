@@ -6,22 +6,23 @@ import MenuItems from '../components/resturant/MenuItems';
 import SubTotalModal from '../components/resturant/SubTotalModal';
 import {useSelector} from 'react-redux'
 
-export default function Resturant({route}) {
+export default function Resturant({route, navigation}) {
     const [modalVisible , setModalVisible] = React.useState(false);
-    const {cart_data} = useSelector(state => state.cartSlice)
+    const {price, cart} = useSelector(state => state.foodItem)
 
     const modalToggle = (e) => {
         setModalVisible(e);
-    }
+    };
 
     return (
         <View style={{flex:1 , position:'relative'}}>
             <About route={route}/>
             <Divider width={1.8} style={{marginVertical:20}}/>
             <MenuItems/>
+
             {
-                cart_data.length > 0 &&
-                <SubTotalModal modalVisible={modalVisible} modalToggle={modalToggle}/>
+                price > 0 &&
+                <SubTotalModal price={price} cart={cart} modalVisible={modalVisible} modalToggle={modalToggle} navigation={navigation}/>
             }
         </View>
     )

@@ -3,17 +3,16 @@ import React from 'react';
 import {Divider} from 'react-native-elements'
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import {useSelector , useDispatch} from 'react-redux';
-import {cart_item} from '../../store/cartSlice'
+import {cart_action} from '../../store/foodItem';
 
 
 export default function MenuItems() {
 
     const dispatch = useDispatch();
     const food_data = useSelector(state => state.foodItem.data);
-    const {cart_data} = useSelector(state => state.cartSlice)
 
     const add_to_cart = (e) => {
-        dispatch(cart_item(e));
+        dispatch(cart_action(e));
     };
 
     return (
@@ -27,6 +26,7 @@ export default function MenuItems() {
                             description={item.description}
                             price={item.price}
                             img={item.img}
+                            checked={item.checked}
                             add_to_cart={add_to_cart}
                         />
                         <Divider width={.5} orientation='vertical' />
@@ -48,10 +48,10 @@ const Items = (props) => (
         <BouncyCheckbox
             iconStyle={{ borderColor: "lightgray", borderRadius: 5 }}
             fillColor='green'
+            isChecked={props.checked}
             onPress={()=>props.add_to_cart({
-                tittle: props.tittle,
-                price : props.price,
-                id:props.id
+                checked : !props.checked,
+                id : props.id
             })}
         />
         <View

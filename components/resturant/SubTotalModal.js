@@ -1,7 +1,8 @@
 import { View, Text, Modal, Pressable, TouchableOpacity, ScrollView } from 'react-native';
 import React from 'react'
 
-export default function SubTotalModal({modalVisible, modalToggle}) {
+export default function SubTotalModal({modalVisible, modalToggle, price, cart, navigation}) {
+    console.log(navigation)
     return (
         <>
             <View
@@ -41,16 +42,16 @@ export default function SubTotalModal({modalVisible, modalToggle}) {
                             color: 'white',
                             fontSize:18
                         }}
-                    > 123 $</Text>
+                    > {price} $</Text>
                 </TouchableOpacity>
             </View>
-            <RenderContent modalVisible={modalVisible} modalToggle={modalToggle}/>
+            <RenderContent modalVisible={modalVisible} modalToggle={modalToggle} price={price} cart={cart} navigation={navigation}/>
         </>
     )
 };
 
 
-const RenderContent = ({modalVisible, modalToggle}) => (
+const RenderContent = ({modalVisible, modalToggle, price, cart, navigation}) => (
     <Modal
         animationType="slide"
         transparent={true}
@@ -89,18 +90,23 @@ const RenderContent = ({modalVisible, modalToggle}) => (
                         }}
                     >Beachside Bar</Text>
 
-                    <View
-                        style={{
-                            flexDirection:'row',
-                            justifyContent:'space-between',
-                            borderBottomWidth: 1,
-                            borderBottomColor: '#0008',
-                            padding:13
-                        }}
-                    >
-                        <Text style={{fontWeight:'700', fontSize:16}}> Any Name </Text>
-                        <Text style={{fontWeight:'700', fontSize:16}}> 23 $ </Text>
-                    </View>
+                    {
+                        cart.map((item, index) => (
+                            <View
+                                key={index}
+                                style={{
+                                    flexDirection:'row',
+                                    justifyContent:'space-between',
+                                    borderBottomWidth: 1,
+                                    borderBottomColor: '#0008',
+                                    padding:13
+                                }}
+                            >
+                                <Text style={{fontWeight:'700', fontSize:16}}> {item.tittle} </Text>
+                                <Text style={{fontWeight:'700', fontSize:16}}> {item.price} $ </Text>
+                            </View>
+                        ))
+                    }
                     
 
 
@@ -112,7 +118,7 @@ const RenderContent = ({modalVisible, modalToggle}) => (
                         }}
                     >
                         <Text style={{fontWeight:'700', fontSize:16}}> Sub Total </Text>
-                        <Text style={{fontWeight:'700', fontSize:16}}> 23 $ </Text>
+                        <Text style={{fontWeight:'700', fontSize:16}}> {price} $ </Text>
                     </View>
 
                     <View
@@ -131,6 +137,9 @@ const RenderContent = ({modalVisible, modalToggle}) => (
                                     fontSize:18,
                                     borderRadius:30,
                                     marginTop:50
+                                }}
+                                onPress={()=> {
+                                    navigation.navigate('Payment')
                                 }}
                             >Checkout</Text>
                         </TouchableOpacity>
