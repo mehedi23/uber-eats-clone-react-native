@@ -1,8 +1,8 @@
 import { View, Text, Modal, Pressable, TouchableOpacity, ScrollView } from 'react-native';
 import React from 'react'
 
-export default function SubTotalModal({modalVisible, modalToggle, price, cart, navigation}) {
-    console.log(navigation)
+export default function SubTotalModal({modalVisible, modalToggle, price, cart}) {
+    
     return (
         <>
             <View
@@ -45,13 +45,13 @@ export default function SubTotalModal({modalVisible, modalToggle, price, cart, n
                     > {price} $</Text>
                 </TouchableOpacity>
             </View>
-            <RenderContent modalVisible={modalVisible} modalToggle={modalToggle} price={price} cart={cart} navigation={navigation}/>
+            <RenderContent modalVisible={modalVisible} modalToggle={modalToggle} price={price} cart={cart}/>
         </>
     )
 };
 
 
-const RenderContent = ({modalVisible, modalToggle, price, cart, navigation}) => (
+const RenderContent = ({modalVisible, modalToggle, price, cart}) => (
     <Modal
         animationType="slide"
         transparent={true}
@@ -137,9 +137,6 @@ const RenderContent = ({modalVisible, modalToggle, price, cart, navigation}) => 
                                     fontSize:18,
                                     borderRadius:30,
                                     marginTop:50
-                                }}
-                                onPress={()=> {
-                                    navigation.navigate('Payment')
                                 }}
                             >Checkout</Text>
                         </TouchableOpacity>
